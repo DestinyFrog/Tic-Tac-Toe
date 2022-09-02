@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>Tic Tac Toe</title>
+        <script type="text/javascript" defer>
+var win = false;
+var player1 = true;
+function play(buttonNumber){
+    if(win == true){return;};
+    let btn = document.getElementById(buttonNumber);
+
+    if(btn.textContent == 'X' || btn.textContent == 'O'){
+        return;
+    }
+
+    if(player1 == true){
+        btn.textContent = 'X';
+        btn.style.color = 'red';
+        player1 = false;
+    }else{
+        btn.textContent = 'O';
+        btn.style.color = 'green';
+        player1 = true;
+    }
+
+    checkWin();
+};
+const odds = ['123','456','789','147','258','369','159','357'];5
+function checkWin(){
+    odds.forEach(odd => {
+        if(document.getElementById(odd[0]).textContent==='X' &&
+           document.getElementById(odd[1]).textContent==='X' &&
+           document.getElementById(odd[2]).textContent==='X'){
+            Win('X', 'rgba(200,0,0,0.4)', odd);
+        }
+        if(document.getElementById(odd[0]).textContent==='O' &&
+           document.getElementById(odd[1]).textContent==='O' &&
+           document.getElementById(odd[2]).textContent==='O'){
+            Win('O', 'rgba(0,200,0,0.4)', odd);
+        }
+    });
+
+    var old = true;
+    for(let i=1;i<10;i++){
+        if(document.getElementById(i.toString()).textContent=='.'){old=false;break;};
+    }
+    if(!old){return;}else{
+    document.getElementById('txt').style.color = 'rgba(255,64,64,1)';
+    document.getElementById('txt').textContent = 'DEU VELHA';
+    win = true;}
+};
+function Win(player, col, od){
+    document.getElementById('txt').textContent = player+' GANHOU';
+    document.getElementById(od[0].toString()).style.backgroundColor = col;
+    document.getElementById(od[1].toString()).style.backgroundColor = col;
+    document.getElementById(od[2].toString()).style.backgroundColor = col;
+    win = true;
+};
+function reset(){
+    document.getElementById('txt').style.color = 'rgba(255,64,64,1)';
+    document.getElementById('txt').textContent = 'JOGO DA VELHA';
+    for(let j=1;j<=9;j++){
+    document.getElementById(j.toString()).style.backgroundColor = 'rgba(229,229,229,1)'
+    document.getElementById(j.toString()).style.color = 'white';
+    document.getElementById(j.toString()).textContent = '.';
+    };
+    win = false;
+};
+        </script>
+        <style type="text/css">
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #2d142c;
+    align-items: center;
+    flex-direction: column;
+}
+.btn{
+    width: 100px;
+    height: 100px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 6%;
+    border-color: #ffaaaa;
+
+    font-family: 'Courier New', Courier, monospace;
+    color:white;
+    font-size: 80px;
+    font-weight: bold;
+
+    margin: 3px;
+    margin-bottom: 6px;
+    background: #e5e5e5;
+    padding: 0px;
+}
+.grid{
+    display: flex;
+    width: 340px;
+    height: 333px;
+    margin-top: 0px;
+    justify-content: center;
+    background-color: #801336;
+    border-radius: 4%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: stretch;
+    flex-direction: column;
+    padding-top: 2px;
+}
+.txt{
+    margin-top: 5px;
+    margin-bottom: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color:#ff4040;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+.block {
+    display: flex;
+    width: 365px;
+    height: 535px;
+    margin-top: 35px;
+    background-color: #510a32;
+    border-radius: 2%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #ffaaaa;
+}
+#reset{
+    margin-top: 30px;
+    width: 240px;
+    height: 60px;
+    font-family: 'Courier New', Courier, monospace;
+    color:#ff4040;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius: 2%;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #ffaaaa;
+    background-color: #2d142c;
+}
+        </style>
+    </head>
+    <body>
+        <div class="block">
+        <h1 id="txt" class="txt">JOGO DA VELHA</h1>
+            <div class="grid">
+            <button id="1" class="btn" type="button" onclick="play('1');">.</button>
+            <button id="2" class="btn" type="button" onclick="play('2');">.</button>
+            <button id="3" class="btn" type="button" onclick="play('3');">.</button>
+            <button id="4" class="btn" type="button" onclick="play('4');">.</button>
+            <button id="5" class="btn" type="button" onclick="play('5');">.</button>
+            <button id="6" class="btn" type="button" onclick="play('6');">.</button>
+            <button id="7" class="btn" type="button" onclick="play('7');">.</button>
+            <button id="8" class="btn" type="button" onclick="play('8');">.</button>
+            <button id="9" class="btn" type="button" onclick="play('9');">.</button>
+            </div>
+        <button id="reset" type="button" onclick="reset()">REINICIAR</button>
+        </div>
+    </body>
+</html>
